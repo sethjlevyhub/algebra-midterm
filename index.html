@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Algebra 1 Midterm · AIC Hybrid Learning</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Fahkwang:wght@400;500;600&family=Nunito+Sans:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="worksheet.css"><link rel="stylesheet" href="midterm.css"><link rel="stylesheet" href="premium.css">
+<script src="config.js"></script><script src="questions.js"></script>
+</head><body class="theme-hs">
+<a class="skip" href="#main">Skip to content</a>
+<header class="ws-header"><div class="ws-header__inner"><div class="ws-logo"><img src="aic-logo.jpg" alt="Acceptance in Christ logo" width="56" height="56"></div>
+<div class="ws-brand">AIC Hybrid Learning<small>Last Steps · Algebra 1</small></div>
+<div class="ws-user" id="who" hidden>Signed in as<br><b id="who-email"></b></div></div></header>
+<div class="ws-titlebar" id="titlebar"><h1>Algebra 1 Midterm</h1><p id="intro">Chapters 1–8 · Choose the best answer for each question.</p></div>
+
+<div class="progressbar" id="progressbar" hidden>
+  <div class="progressbar__inner">
+    <span class="progressbar__count" id="pcount" aria-live="polite">0 of 36 answered</span>
+    <label class="progressbar__jump"><span class="sr-only">Jump to chapter</span>
+      <select id="jump" aria-label="Jump to chapter"><option value="">Jump to chapter…</option></select></label>
+  </div>
+  <div class="progressbar__track" role="progressbar" aria-label="Midterm progress" aria-valuemin="0" aria-valuemax="36" aria-valuenow="0" id="ptrack"><div class="progressbar__fill" id="pfill"></div></div>
+</div>
+
+<main class="ws-main" id="main" tabindex="-1">
+  <section class="signin" id="signin" aria-labelledby="signin-h">
+    <h2 id="signin-h">Algebra 1 Midterm</h2>
+    <p class="signin__lead">Sign in with your name and password to begin.</p>
+    <div id="signin-msg" class="notice err" role="alert" hidden></div>
+    <form class="signin__form" id="signin-form" novalidate autocomplete="on">
+      <label class="field"><span class="field__label">Name</span>
+        <input id="si-name" name="username" type="text" autocomplete="username" autocapitalize="words" spellcheck="false" required></label>
+      <label class="field"><span class="field__label">Password</span>
+        <input id="si-pass" name="password" type="password" autocomplete="current-password" required></label>
+      <button class="btn btn--big" type="submit" id="si-submit">Sign In</button>
+    </form>
+    <p class="signin__note">Use the first name and password Mr. Levy gave you.</p>
+  </section>
+
+  <section class="welcome" id="welcome" hidden aria-labelledby="welcome-h" tabindex="-1">
+    <h2 id="welcome-h">Welcome, <span id="w-name"></span></h2>
+    <p class="welcome__acct">Signed in as <b id="w-email"></b> · <a href="#" id="switch">Not you? Sign out</a></p>
+    <ul class="welcome__list">
+      <li><b id="w-count">36</b> multiple-choice questions from Chapters 1–8.</li>
+      <li>Choose one answer for each question.</li>
+      <li>Your answers save automatically, but <strong>only on this device and browser</strong>.</li>
+      <li class="device-warn"><strong>Stay on the same device until you submit.</strong> If you switch to another computer, phone, or browser partway through, your answers will not come with you and you will have to start over.</li>
+      <li>You can submit only once, so check your work first.</li>
+    </ul>
+    <button class="btn btn--big" type="button" id="begin">Begin Midterm</button>
+  </section>
+
+  <div id="status" class="notice" role="alert" hidden><span id="status-msg"></span> <button type="button" class="linkbtn" id="status-act" hidden></button></div>
+  <form id="exam" hidden novalidate></form>
+  <section class="thanks" role="status" id="thanks" hidden tabindex="-1"><div class="thanks__icon" aria-hidden="true">✓</div>
+    <h2>Submitted. Nice work, <span id="t-name"></span>.</h2>
+    <p>Your answers were sent to your teacher and a copy went to your parent.</p>
+    <p>Submitted <span id="t-time"></span></p><span class="score" id="t-score"></span></section>
+</main>
+<script src="app.js"></script>
+</body></html>
