@@ -87,7 +87,7 @@
 
   function switchAccount(e) {
     if (e) e.preventDefault();
-    token = null; login = null; adminBanner(false); $('si-pass').value = ''; reauth = false; $('who').hidden = true; showStatus('');
+    token = null; login = null; adminBanner(false); againBtn(false); $('si-pass').value = ''; reauth = false; $('who').hidden = true; showStatus('');
     form.querySelectorAll('input:checked').forEach(function (i) { i.checked = false; }); refresh();
     signinMsg(''); show('signin'); window.scrollTo(0, 0); focusSignin();
   }
@@ -147,6 +147,19 @@
       document.body.insertBefore(b, document.body.firstChild); }
     if (b) b.hidden = !on;
   }
+  // Admins only: retake the preview as many times as they like
+  function againBtn(on) {
+    var b = $('again');
+    if (!b && on) { b = document.createElement('button'); b.type = 'button'; b.id = 'again'; b.className = 'btn'; b.textContent = 'Take it again';
+      b.style.marginTop = '18px'; $('thanks').appendChild(b); b.addEventListener('click', takeAgain); }
+    if (b) b.hidden = !on;
+  }
+  function takeAgain() {
+    try { localStorage.removeItem(STORE); } catch (e) {}
+    form.querySelectorAll('input:checked').forEach(function (i) { i.checked = false; }); resetBtn(); showStatus('');
+    againBtn(false); $('begin').textContent = 'Begin Midterm'; $('begin').hidden = false; $('welcome').classList.remove('is-blocked');
+    show('welcome'); window.scrollTo(0, 0); $('welcome').focus();
+  }
   function first(n) { return String(n).split(/[ @]/)[0]; }
   $('begin').addEventListener('click', function () {
     show('exam'); var q = firstUnanswered() || Q[0];
@@ -188,7 +201,8 @@
       $('t-time').textContent = new Date(r.submittedAt || Date.now()).toLocaleString([], { weekday: 'short', month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
       $('t-score').textContent = 'Score: ' + r.score + ' / ' + r.total;
       adminBanner(r.role === 'admin' || isAdmin);
-      if (isAdmin) { var tp = $('thanks').querySelector('p'); if (tp && /parent/.test(tp.textContent)) tp.textContent = 'Admin preview: graded only. Nothing was recorded and no emails were sent.'; }
+      if (isAdmin) { var tp = $('thanks').querySelector('p'); if (tp && /parent|recorded/.test(tp.textContent)) tp.textContent = 'Admin preview: not recorded as a result. A [PREVIEW] copy of the results was emailed to Mr. Levy and to you.'; }
+      againBtn(isAdmin);
       $('thanks').focus(); window.scrollTo(0, 0);
     }).catch(function (err) {
       resetBtn(); save();
